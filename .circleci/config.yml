@@ -1,0 +1,79 @@
+version: 2
+
+job_defaults: &job_defaults
+  docker:
+    - image: circleci/node:latest
+  working_directory: ~/project/repo
+
+cache_key: &cache_key ngrx-tslint-rules-deps-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+dist_key: &dist_key ngrx-tslint-rules-dist-{{ .Revision }}
+
+jobs:
+  install:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: *cache_key
+      - run:
+          name: install-dependencies
+          command: npm ci
+      - save_cache:
+          key: *cache_key
+          paths:
+            - node_modules
+
+  build:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: *cache_key
+      - run:
+          name: build
+          command: npm run build
+      - save_cache:
+          key: *dist_key
+          paths:
+              - dist
+  test:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: *cache_key
+      - restore_cache:
+          key: *dist_key
+      - run:
+          name: test
+          command: npm test
+
+  release:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: *cache_key
+      - restore_cache:
+          key: *dist_key
+      - run:
+         name: release
+         command: npm run semantic-release || true
+
+workflows:
+  version: 2
+  build-test-release:
+    jobs:
+      - install
+      - build:
+          requires:
+            - install
+      - test:
+          requires:
+            - build
+      - release:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

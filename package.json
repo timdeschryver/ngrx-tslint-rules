@@ -1,0 +1,68 @@
+{
+  "name": "ngrx-tslint-rules",
+  "version": "0.0.0-development",
+  "description": "TSLint rules for NgRx",
+  "keywords": [
+    "NgRx",
+    "lint",
+    "rules",
+    "tslint"
+  ],
+  "author": "Tim Deschryver",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timdeschryver/ngrx-tslint-rules.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timdeschryver/ngrx-tslint-rules/issues"
+  },
+  "homepage": "https://github.com/timdeschryver/ngrx-tslint-rules#readme",
+  "private": false,
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "postbuild": "cp ./README.md ./dist & cp ./package.json ./dist",
+    "test": "tslint --test ./test/rules/**",
+    "semantic-release": "semantic-release"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "release": {
+    "pkgRoot": "dist"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslint": "^5.0.0",
+    "typescript": "^3.4.2"
+  },
+  "dependencies": {
+    "@phenomnomnominal/tsquery": "^3.0.0",
+    "tslib": "^1.8.0",
+    "tsutils": "^3.0.0",
+    "tsutils-etc": "^1.1.0"
+  },
+  "devDependencies": {
+    "@ngrx/store": "^8.0.0",
+    "@types/node": "^12.6.8",
+    "husky": "^3.0.1",
+    "lint-staged": "^9.2.0",
+    "prettier": "^1.18.2",
+    "semantic-release": "^15.13.18",
+    "tslint": "^5.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.2"
+  }
+}

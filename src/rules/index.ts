@@ -1,0 +1,7 @@
+module.exports = {
+  rulesDirectory: '.',
+  rules: {
+    'ngrx-action-hygiene': true,
+    'ngrx-unique-reducer-actions': true,
+  },
+}

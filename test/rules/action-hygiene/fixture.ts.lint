@@ -1,0 +1,41 @@
+import { createAction } from '@ngrx/store'
+
+// simple createAction
+
+const action = createAction('customers load')
+                            ~~~~~~~~~~~~~~~~                          [action-hygiene]
+
+const action = createAction(
+  '[Customers]: load'
+  ~~~~~~~~~~~~~~~~~~~                       [action-hygiene]
+)
+
+const action = createAction('[Customers] load')
+
+// props createAction
+
+const action = createAction('customers load', props<{ page: number }>)
+                            ~~~~~~~~~~~~~~~~                          [action-hygiene]
+
+const action = createAction(
+  '[Customers]: load', 
+  ~~~~~~~~~~~~~~~~~~~                       [action-hygiene]
+  props<{ page: number }>
+)
+
+const action = createAction('[Customers] load', props<{ page: number }>)
+
+// function createAction
+
+const action = createAction('customers load', ( page: number ) => ({ number }))
+                            ~~~~~~~~~~~~~~~~                          [action-hygiene]
+
+const action = createAction(
+  '[Customers]: load', 
+  ~~~~~~~~~~~~~~~~~~~                       [action-hygiene]
+  ( page: number ) => ({ number })
+)
+
+const action = createAction('[Customers] load', ( page: number ) => ({ number }))
+
+[action-hygiene]: Action type does not follow the good action hygiene practice, use "[Source] Event" to define action types
