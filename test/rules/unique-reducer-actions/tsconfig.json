@@ -8,6 +8,5 @@
     },
     "skipLibCheck": true,
     "target": "es5"
-  },
-  "include": ["fixture.ts"]
+  }
 }

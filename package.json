@@ -24,7 +24,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "postbuild": "cp ./README.md ./dist & cp ./package.json ./dist",
-    "test": "tslint --test ./test/rules/**",
+    "test": "tslint --test ./test/rules/**/tslint.json",
     "semantic-release": "semantic-release"
   },
   "husky": {

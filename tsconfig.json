@@ -10,6 +10,7 @@
     "outDir": "./dist",
     "removeComments": true,
     "skipLibCheck": true,
+    "downlevelIteration": true,
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5"
