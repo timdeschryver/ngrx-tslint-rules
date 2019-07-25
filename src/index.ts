@@ -4,5 +4,5 @@ module.exports = {
     'ngrx-no-duplicate-action-types': true,
     'ngrx-unique-reducer-actions': true,
   },
-  rulesDirectory: '.',
+  rulesDirectory: './rules',
 }

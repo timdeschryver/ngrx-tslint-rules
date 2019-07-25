@@ -1,6 +1,8 @@
 {
   "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
-    "file-name-casing": [true, "camel-case"]
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false,
+    "interface-name": false
   }
 }

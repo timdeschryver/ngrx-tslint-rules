@@ -3,5 +3,5 @@
   "rules": {
     "ngrx-no-duplicate-action-types": true
   },
-  "rulesDirectory": ["../../../dist"]
+  "rulesDirectory": ["../../../dist/rules"]
 }

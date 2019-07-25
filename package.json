@@ -23,9 +23,13 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "postbuild": "cp ./README.md ./dist & cp ./package.json ./dist",
+    "postbuild": "npm run copy:general && npm run copy:schematics",
+    "copy:general": "cp ./README.md ./dist & cp ./package.json ./dist",
+    "copy:schematics": "cp ./src/schematics/collection.json ./dist/schematics & cp ./src/schematics/ng-add/schema.json ./dist/schematics/ng-add",
     "lint": "tslint -p .",
-    "test": "tslint --test ./test/rules/**/tslint.json",
+    "test": "npm run test:schematics && npm run test:rules",
+    "test:schematics": "jest --config ./test/jest.config.json",
+    "test:rules": "tslint --test ./test/rules/**/tslint.json",
     "semantic-release": "semantic-release"
   },
   "husky": {
@@ -45,6 +49,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "schematics": "./schematics/collection.json",
   "peerDependencies": {
     "tslint": "^5.0.0",
     "typescript": "^3.4.2"
@@ -56,12 +61,16 @@
     "tsutils-etc": "^1.1.0"
   },
   "devDependencies": {
+    "@angular-devkit/schematics": "^8.1.2",
     "@ngrx/store": "^8.0.0",
+    "@types/jest": "^24.0.15",
     "@types/node": "^12.6.8",
     "husky": "^3.0.1",
+    "jest": "^24.8.0",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
     "semantic-release": "^15.13.18",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.2"

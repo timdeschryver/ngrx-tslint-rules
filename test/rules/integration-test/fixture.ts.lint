@@ -1,0 +1,7 @@
+import { createAction } from '@ngrx/store'
+
+
+const action = createAction('customers load')
+                            ~~~~~~~~~~~~~~~~                          [action-hygiene]
+
+[action-hygiene]: Action type does not follow the good action hygiene practice, use "[Source] Event" to define action types

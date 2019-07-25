@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsNgRxTSLintRules",
+  "title": "ngrx-tslint-rules schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to the tslint.json file.",
+      "default": "tslint.json"
+    }
+  },
+  "required": []
+}
