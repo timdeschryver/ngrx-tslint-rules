@@ -58,14 +58,14 @@ const loadCustomers = createAction('[Customers Page] Load Customers')
 const loadCustomers = createAction('[Customers Page] Load Customers')
 const createCustomer = createAction(
   '[Customers Page] Load Customers',
-  props<{ customer }>(),
+  props<{ customer: Customer }>(),
 )
 
 // Valid
 const loadCustomers = createAction('[Customers Page] Load Customers')
 const createCustomer = createAction(
   '[Customers Page] Create Customer',
-  props<{ customer }>(),
+  props<{ customer: Customer }>(),
 )
 ```
 

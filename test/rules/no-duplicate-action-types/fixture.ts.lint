@@ -6,18 +6,19 @@ const actionOK = createAction('[OK] One')
 const actionFromSameFile = createAction('[Same File] One')
 
 const actionFromSameFile2 = createAction('[Same File] One')
-                                         ~~~~~~~~~~~~~~~~~              [no-dup % ("'[Same File] One'")]
+                                         ~~~~~~~~~~~~~~~~~                          [no-dup % ("'[Same File] One'")]
 
 
-const actionFromSameFileWithProps = createAction('[Same File] Props', props<{ foo }>())
-const actionFromSameFileWithProps2 = createAction('[Same File] Props', props<{ bar }>())
+const actionFromSameFileWithProps = createAction('[Same File] Props', props<{ foo: string }>())
+const actionFromSameFileWithProps2 = createAction('[Same File] Props', props<{ bar: string }>())
                                                   ~~~~~~~~~~~~~~~~~~~               [no-dup % ("'[Same File] Props'")]
 
-const actionFromSameFileWithFn = createAction('[Same File] Fn', () => { loaded: true })
-const actionFromSameFileWithFn2 = createAction('[Same File] Fn',() => { loaded: false })
-                                               ~~~~~~~~~~~~~~~~               [no-dup % ("'[Same File] Fn'")]
+const actionFromSameFileWithFn = createAction('[Same File] Fn', () => ({ loaded: true }))
+const actionFromSameFileWithFn2 = createAction('[Same File] Fn',() => ({ loaded: false }))
+                                               ~~~~~~~~~~~~~~~~                     [no-dup % ("'[Same File] Fn'")]
 
 const actionFromOtherFile = createAction('[Multiple Files] One')
-                                         ~~~~~~~~~~~~~~~~~~~~~~         [An action type must be unique. Duplicate action type '[Multiple Files] One' in files fixture.ts and actions.ts.]   
+                                         ~~~~~~~~~~~~~~~~~~~~~~                     [no-dup-files % ("'[Multiple Files] One'", "fixture.ts", "actions.ts")]   
 
 [no-dup]: An action type must be unique. Duplicate action type %s.
+[no-dup-files]: An action type must be unique. Duplicate action type %s in files %s and %s.
