@@ -1,0 +1,17 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, Effect } from '@ngrx/effects'
+
+@Injectable()
+export class FixtureEffects {
+  @Effect({ dispatch: false })
+  both = createEffect(() => this.actions)
+  ~~~~                                                  [error]
+  @Effect({ dispatch: false })
+  onlyDecorator = this.actions
+
+  onlyCreator = createEffect(() => this.actions)
+
+  constructor(private actions: Actions){}
+}
+
+[error]: Remove the `@Effect` decorator or the `createEffect` creator

@@ -33,11 +33,12 @@ Next, add `ngrx-tslint-rules` to your `tslint.json` file
 
 > By default all rules are enabled
 
-| Rule                                                                | Description                                                   |
-| ------------------------------------------------------------------- | ------------------------------------------------------------- |
-| [`ngrx-action-hygiene`](#ngrx-action-hygiene)                       | Enforces the use of good action hygiene                       |
-| [`ngrx-no-duplicate-action-types`](#ngrx-no-duplicate-action-types) | An action type must be unique                                 |
-| [`ngrx-unique-reducer-actions`](#ngrx-unique-reducer-actions)       | An action can't be handled multiple times in the same reducer |
+| Rule                                                                      | Description                                                                                                                    |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [`ngrx-action-hygiene`](#ngrx-action-hygiene)                             | Enforces the use of good action hygiene                                                                                        |
+| [`ngrx-effect-creator-and-decorator`](#ngrx-effect-creator-and-decorator) | An Effect should only use the effect creator (`createEffect`) or the Effect decorator (`@Effect`), but not both simultaneously |
+| [`ngrx-no-duplicate-action-types`](#ngrx-no-duplicate-action-types)       | An action type must be unique                                                                                                  |
+| [`ngrx-unique-reducer-actions`](#ngrx-unique-reducer-actions)             | An action can't be handled multiple times in the same reducer                                                                  |
 
 ### Examples
 
@@ -49,6 +50,21 @@ const loadCustomers = createAction('Load Customers')
 
 // Valid
 const loadCustomers = createAction('[Customers Page] Load Customers')
+```
+
+#### `ngrx-effect-creator-and-decorator`
+
+```ts
+// Invalid: Effect uses the `@Effect` decorator and the `createEffect` creator
+@Effect()
+loadCustomers = createEffect(...)
+
+// Valid: using `createEffect`
+loadCustomers = createEffect(...)
+
+// Valid: using `@Effect`
+@Effect()
+loadCustomers = ...
 ```
 
 #### `ngrx-no-duplicate-action-types`
