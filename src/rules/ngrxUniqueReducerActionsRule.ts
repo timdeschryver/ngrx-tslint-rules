@@ -30,10 +30,14 @@ export class Rule extends Lint.Rules.TypedRule {
     )
 
     const duplicatesInReducer = reducers.map((reducer): Lint.RuleFailure[] => {
-      const actionNodes = tsquery(
+      const onNodes = tsquery(
         reducer,
-        `CallExpression > CallExpression > Identifier:nth-child(1)`,
-      )
+        `CallExpression > CallExpression`,
+      ) as ts.CallExpression[]
+      const actionNodes = onNodes
+        .filter(node => node.arguments && node.arguments.length > 1)
+        .map(node => node.arguments[0])
+
       const actionCounter = actionNodes.reduce<Record<string, ts.Node[]>>(
         (counter, actionNode): Record<string, ts.Node[]> => {
           const actionName = actionNode.getText()
