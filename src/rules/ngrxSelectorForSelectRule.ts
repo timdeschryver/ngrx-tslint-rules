@@ -19,17 +19,27 @@ export class Rule extends Lint.Rules.TypedRule {
   public static FAILURE_STRING =
     'Using string or props drilling is not preferred, use a selector instead'
 
-  private static STRING_LITERAL_QUERY = `CallExpression:has(PropertyAccessExpression > Identifier[name="pipe"]) > CallExpression > StringLiteral`
-  private static PROP_DRILLING_QUERY = `CallExpression:has(PropertyAccessExpression > Identifier[name=pipe]) > CallExpression ArrowFunction`
+  private static SELECT_QUERY = `CallExpression:has(PropertyAccessExpression > Identifier[name="pipe"]) > CallExpression:has(Identifier[name="select"])`
 
   public applyWithProgram(
     sourceFile: ts.SourceFile,
     program: ts.Program,
   ): Lint.RuleFailure[] {
-    const stringHits = tsquery(sourceFile, Rule.STRING_LITERAL_QUERY)
-    const propDrillHits = tsquery(sourceFile, Rule.PROP_DRILLING_QUERY)
+    const selectNodes = tsquery(
+      sourceFile,
+      Rule.SELECT_QUERY,
+    ) as ts.CallExpression[]
 
-    const failures = [...stringHits, ...propDrillHits].map(
+    const args = selectNodes.reduce(
+      (result, selectNode) => [...result, ...selectNode.arguments],
+      [] as ts.Node[],
+    )
+
+    const failures = args.filter(
+      node => ts.isStringLiteral(node) || ts.isArrowFunction(node),
+    )
+
+    return failures.map(
       (node): Lint.RuleFailure =>
         new Lint.RuleFailure(
           sourceFile,
@@ -39,7 +49,5 @@ export class Rule extends Lint.Rules.TypedRule {
           this.ruleName,
         ),
     )
-
-    return failures
   }
 }

@@ -1,3 +1,5 @@
+import { of } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { Store, select, createSelector } from '@ngrx/store'
 
 const store: Store<any> = {};
@@ -21,5 +23,9 @@ store.pipe(select(state => state.customers.orders))
                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       [selector-for-select]
 
 store.pipe(select(selectCustomers))
+
+of('hello world').pipe(
+  map(s => s.toUpperCase())
+)
 
 [selector-for-select]: Using string or props drilling is not preferred, use a selector instead
