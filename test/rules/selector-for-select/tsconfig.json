@@ -4,7 +4,8 @@
     "lib": ["es2015"],
     "noEmit": true,
     "paths": {
-      "@ngrx/store": ["../../../node_modules/@ngrx/store"]
+      "@ngrx/store": ["../../../node_modules/@ngrx/store"],
+      "rxjs": ["../../../node_modules/rxjs"]
     },
     "skipLibCheck": true,
     "target": "es5"
