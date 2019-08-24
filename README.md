@@ -1,5 +1,7 @@
 # ngrx-tslint-rules
 
+> For the ESLint version of this library see, [eslint-plugin-ngrx](https://github.com/timdeschryver/eslint-plugin-ngrx)
+
 ## Installation
 
 ### Using the Angular CLI
