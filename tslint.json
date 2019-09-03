@@ -3,6 +3,7 @@
   "rules": {
     "no-implicit-dependencies": false,
     "no-submodule-imports": false,
-    "interface-name": false
+    "interface-name": false,
+    "prefer-const": false
   }
 }

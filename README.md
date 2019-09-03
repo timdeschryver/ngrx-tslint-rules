@@ -6,7 +6,8 @@
 
 ### Using the Angular CLI
 
-If your project is using the Angular CLI then you can install `ngrx-tslint-rules` to your project with the following ng add command
+Use the ng-add command from the Angular CLI to be guided with the installation.
+We'll ask you for which rules you want to enable.
 
 ```bash
 ng add ngrx-tslint-rules
@@ -14,13 +15,13 @@ ng add ngrx-tslint-rules
 
 ### Manual install with npm or yarn
 
-First install `ngrx-tslint-rules` as a dependency with the following command
+First install `ngrx-tslint-rules` as a dependency with the following command.
 
 ```bash
 npm install ngrx-tslint-rules --save-dev
 ```
 
-Next, add `ngrx-tslint-rules` to your `tslint.json` file
+Next, add `ngrx-tslint-rules` to your `tslint.json` file, and the rules to the `rules` config.
 
 ```json
 {
@@ -28,6 +29,14 @@ Next, add `ngrx-tslint-rules` to your `tslint.json` file
   "rules": {
     ...
   }
+}
+```
+
+To enable all rules, use the `recommended` configuration file.
+
+```json
+{
+  "extends": ["ngrx-tslint-rules/recommended"]
 }
 ```
 
