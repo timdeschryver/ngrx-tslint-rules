@@ -5,14 +5,23 @@ import {
   SchematicsException,
   Tree,
 } from '@angular-devkit/schematics'
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks'
 
 import { Schema } from './schema'
 
 export default function(options: Schema): Rule {
   return (host: Tree, context: SchematicContext) => {
     return chain([
+      updateDependencies(),
       extendTSLintRules(options.path || './tslint.json', options.rules),
     ])(host, context)
+  }
+}
+
+function updateDependencies(): Rule {
+  return (tree: Tree, context: SchematicContext) => {
+    context.addTask(new NodePackageInstallTask())
+    return tree
   }
 }
 
