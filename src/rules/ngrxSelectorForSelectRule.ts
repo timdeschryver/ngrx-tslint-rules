@@ -19,7 +19,7 @@ export class Rule extends Lint.Rules.TypedRule {
   public static FAILURE_STRING =
     'Using string or props drilling is not preferred, use a selector instead'
 
-  private static SELECT_QUERY = `CallExpression:has(PropertyAccessExpression > Identifier[name="pipe"]) > CallExpression:has(Identifier[name="select"])`
+  private static SELECT_QUERY = `CallExpression:has(PropertyAccessExpression > Identifier[name="pipe"]) > CallExpression > Identifier[name="select"]`
 
   public applyWithProgram(
     sourceFile: ts.SourceFile,
@@ -28,10 +28,13 @@ export class Rule extends Lint.Rules.TypedRule {
     const selectNodes = tsquery(
       sourceFile,
       Rule.SELECT_QUERY,
-    ) as ts.CallExpression[]
+    ) as ts.Identifier[]
 
     const args = selectNodes.reduce(
-      (result, selectNode) => [...result, ...selectNode.arguments],
+      (result, selectNode) => [
+        ...result,
+        ...(selectNode.parent as ts.CallExpression).arguments,
+      ],
       [] as ts.Node[],
     )
 
