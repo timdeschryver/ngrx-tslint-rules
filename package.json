@@ -55,10 +55,8 @@
     "typescript": "^3.4.2"
   },
   "dependencies": {
-    "@angular-devkit/core": "^8.3.2",
     "@angular-devkit/schematics": "^8.3.2",
     "@phenomnomnominal/tsquery": "^3.0.0",
-    "@schematics/angular": "^8.3.2",
     "tslib": "^1.8.0",
     "tsutils": "^3.0.0",
     "tsutils-etc": "^1.1.0"
