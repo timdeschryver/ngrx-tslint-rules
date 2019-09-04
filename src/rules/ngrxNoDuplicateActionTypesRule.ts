@@ -11,7 +11,7 @@ export class Rule extends Lint.Rules.TypedRule {
     optionsDescription: 'Not configurable',
     requiresTypeInfo: false,
     ruleName: 'ngrx-no-duplicate-action-types',
-    type: 'maintainability',
+    type: 'functionality',
     typescriptOnly: true,
   }
 

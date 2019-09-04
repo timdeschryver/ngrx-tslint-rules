@@ -13,7 +13,7 @@
     "rules": {
       "type": "array",
       "description": "Rules to use in a project",
-      "default": "[recommended]",
+      "default": "recommended",
       "x-prompt": {
         "message": "Choose the rules to use in your project:",
         "type": "list",
@@ -22,26 +22,6 @@
           {
             "value": "recommended",
             "label": "ngrx-tslint-rules/recommended (configuration file to enable all the rules)"
-          },
-          {
-            "value": "ngrx-action-hygiene",
-            "label": "ngrx-action-hygiene"
-          },
-          {
-            "value": "ngrx-effect-creator-and-decorator",
-            "label": "ngrx-effect-creator-and-decorator"
-          },
-          {
-            "value": "ngrx-no-duplicate-action-types",
-            "label": "ngrx-no-duplicate-action-types"
-          },
-          {
-            "value": "ngrx-selector-for-select",
-            "label": "ngrx-selector-for-select"
-          },
-          {
-            "value": "ngrx-unique-reducers-action",
-            "label": "ngrx-unique-reducers-action"
           }
         ]
       }

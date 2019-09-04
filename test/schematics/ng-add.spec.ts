@@ -32,7 +32,10 @@ it(`adds ngrx-tslint-rules to string extends`, () => {
 })
 
 it(`adds ngrx-tslint-rules to array extends`, () => {
-  const tslint = setup(`{"extends": ["tslint:latest"]}`, ['recommended'])
+  const tslint = setup(
+    `{"extends": ["tslint:latest", "ngrx-tslint-rules/recommended"]}`,
+    ['recommended'],
+  )
 
   expect(tslint).toBe(stripIndent`
     {
@@ -114,7 +117,7 @@ function setup(content: string, rules: string[]) {
 
   const collectionPath = path.join(
     __dirname,
-    '../../src/schematics/collection.json',
+    '../../dist/schematics/collection.json',
   )
   const schematicRunner = new SchematicTestRunner(
     'ngrx-tslint-rules',

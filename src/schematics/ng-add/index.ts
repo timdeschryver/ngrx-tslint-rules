@@ -5,6 +5,8 @@ import {
   SchematicsException,
   Tree,
 } from '@angular-devkit/schematics'
+import * as fs from 'fs'
+import * as path from 'path'
 
 import { Schema } from './schema'
 
@@ -16,13 +18,13 @@ export default function(options: Schema): Rule {
   }
 }
 
-function extendTSLintRules(path: string, selectedRules: string[]) {
+function extendTSLintRules(filePath: string, selectedRules: string[]) {
   return (tree: Tree) => {
-    const tslint = tree.get(path)
+    const tslint = tree.get(filePath)
     let asJson = JSON.parse(tslint.content.toString())
 
     if (asJson === null || typeof asJson !== 'object') {
-      throw new SchematicsException(`Error reading tslint file at ${path}`)
+      throw new SchematicsException(`Error reading tslint file at ${filePath}`)
     }
 
     const recommendedOption = 'recommended'
@@ -35,37 +37,32 @@ function extendTSLintRules(path: string, selectedRules: string[]) {
     if (!asJson.extends) {
       asJson.extends = [extendFrom]
     } else if (typeof asJson.extends === 'string') {
-      asJson.extends = [asJson.extends, extendFrom]
+      asJson.extends = [...new Set([asJson.extends, extendFrom])]
     } else if ('length' in asJson.extends) {
-      asJson.extends = [...asJson.extends, extendFrom]
-    }
-
-    const rulesSeverity = {
-      'ngrx-action-hygiene': {
-        severity: 'warning',
-      },
-      'ngrx-effect-creator-and-decorator': {
-        severity: 'error',
-      },
-      'ngrx-no-duplicate-action-types': {
-        severity: 'error',
-      },
-      'ngrx-selector-for-select': {
-        severity: 'warning',
-      },
-      'ngrx-unique-reducer-actions': {
-        severity: 'error',
-      },
+      asJson.extends = [...new Set([...asJson.extends, extendFrom])]
     }
 
     if (!recommended) {
       asJson.rules = asJson.rules || {}
+      const configContent = fs.readFileSync(
+        path.join(__dirname, 'rules-config.json'),
+        'utf-8',
+      )
+      const rulesConfig = JSON.parse(configContent)
+
       const rulesToAdd = selectedRules
         .filter(p => p !== recommendedOption)
-        .reduce(
-          (rules, name) => ({ ...rules, [name]: rulesSeverity[name] }),
-          {},
-        )
+        .reduce((rules, name) => {
+          const ruleInfo = rulesConfig[name]
+          return {
+            ...rules,
+            [name]: {
+              severity: `${
+                ruleInfo.type === 'functionality' ? 'error' : 'warning'
+              }`,
+            },
+          }
+        }, {})
 
       asJson.rules = {
         ...asJson.rules,
@@ -73,7 +70,7 @@ function extendTSLintRules(path: string, selectedRules: string[]) {
       }
     }
 
-    tree.overwrite(path, JSON.stringify(asJson, null, 2))
+    tree.overwrite(filePath, JSON.stringify(asJson, null, 2))
     return tree
   }
 }
