@@ -23,9 +23,10 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc",
-    "postbuild": "npm run copy:general && npm run copy:schematics",
+    "postbuild": "npm run copy:general && npm run copy:schematics && npm run generate-schema",
     "copy:general": "cp ./README.md ./dist & cp ./package.json ./dist",
     "copy:schematics": "cp ./src/schematics/collection.json ./dist/schematics & cp ./src/schematics/ng-add/schema.json ./dist/schematics/ng-add",
+    "generate-schema": "ts-node ./src/scripts/generate-schema.ts",
     "lint": "tslint -p .",
     "test": "npm run test:schematics && npm run test:rules",
     "test:schematics": "jest --config ./test/jest.config.json",
@@ -72,6 +73,7 @@
     "prettier": "^1.18.2",
     "semantic-release": "^15.13.18",
     "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
     "tslint": "^5.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.2"
