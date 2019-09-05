@@ -11,8 +11,8 @@ const schema = fs.readFileSync(
   'utf-8',
 )
 const generatedSchema = JSON.parse(schema)
-generatedSchema['properties']['rules']['x-prompt']['items'] = [
-  ...generatedSchema['properties']['rules']['x-prompt']['items'],
+generatedSchema.properties.rules['x-prompt'].items = [
+  ...generatedSchema.properties.rules['x-prompt'].items,
   ...Object.entries(rulesConfig).map(([key, value]: [string, any]) => ({
     label: `${key} (${value.description})`,
     value: key,
