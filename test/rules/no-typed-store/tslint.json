@@ -1,0 +1,7 @@
+{
+  "defaultSeverity": "error",
+  "rules": {
+    "ngrx-no-typed-store": true
+  },
+  "rulesDirectory": ["../../../dist/rules"]
+}

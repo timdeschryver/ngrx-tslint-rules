@@ -1,0 +1,23 @@
+import { Store } from '@ngrx/store'
+
+export class NotOk {
+  constructor(store: Store<PersonsState>){}
+                           ~~~~~~~~~~~~                                           [no-typed-store]
+}
+
+
+export class NotOk2 {
+  constructor(cdr: ChangeDetectionRef, private store: Store<CustomersState>){}
+                                                            ~~~~~~~~~~~~~~        [no-typed-store]
+}
+
+export class Ok {
+  constructor(store: Store<{}>)
+}
+
+
+export class NotOk2 {
+  constructor(private store: Store<any>, private personsService: PersonsService){}
+}
+
+[no-typed-store]: Store should not be typed, use `Store<{}>` instead
