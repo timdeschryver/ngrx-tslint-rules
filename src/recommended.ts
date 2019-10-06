@@ -5,7 +5,6 @@ module.exports = {
     'ngrx-no-duplicate-action-types': true,
     'ngrx-no-typed-store': true,
     'ngrx-selector-for-select': true,
-    'ngrx-unique-reducer-actions': true,
   },
   rulesDirectory: './rules',
 }

@@ -1,7 +1,0 @@
-{
-  "defaultSeverity": "error",
-  "rules": {
-    "ngrx-unique-reducer-actions": true
-  },
-  "rulesDirectory": ["../../../dist/rules"]
-}
