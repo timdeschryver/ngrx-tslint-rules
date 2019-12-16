@@ -1,0 +1,7 @@
+{
+  "defaultSeverity": "error",
+  "rules": {
+    "ngrx-avoid-dispatching-multiple-actions-sequentially": true
+  },
+  "rulesDirectory": ["../../../dist/rules"]
+}

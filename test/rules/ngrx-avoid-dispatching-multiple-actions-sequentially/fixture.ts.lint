@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+
+@Component()
+export class FixtureComponent {
+  name = 'Tim'
+  constructor(private store: Store<{}>){}
+
+  pingPong() {
+    this.store.dispatch({ type: 'PING' })
+    this.store.dispatch({ type: 'PONG' })
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         [error]
+  }
+
+  ping() {
+    this.store.dispatch({ type: 'PING' })
+  }
+
+  pong() {
+    this.store.dispatch({ type: 'PING' })
+    this.ping();
+    this.name = 'Bob'
+    this.store.dispatch({ type: 'PONG' })
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         [error]
+  }
+
+  pingPongPong() {
+    this.store.dispatch({ type: 'PING' })
+    this.store.dispatch({ type: 'PONG' })
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         [error]
+    this.store.dispatch({ type: 'PONG' })
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         [error]
+  }
+}
+
+[error]: Avoid dispatching many actions in a row to accomplish a larger conceptual "transaction"

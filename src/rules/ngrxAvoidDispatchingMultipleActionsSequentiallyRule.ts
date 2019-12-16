@@ -4,20 +4,23 @@ import * as ts from 'typescript'
 
 export class Rule extends Lint.Rules.TypedRule {
   public static metadata: Lint.IRuleMetadata = {
-    description: 'An Effect should not call store.dispatch',
-    descriptionDetails: 'An action should be returned from the effect',
+    description: 'It is recommended to only dispatch one action at a time',
+    descriptionDetails:
+      'See more at https://redux.js.org/style-guide/style-guide#avoid-dispatching-many-actions-sequentially',
     options: null,
     optionsDescription: 'Not configurable',
     requiresTypeInfo: false,
-    ruleName: 'ngrx-no-dispatch-in-effects',
+    ruleName: 'ngrx-avoid-dispatching-multiple-actions-sequentially',
     type: 'maintainability',
     typescriptOnly: true,
   }
 
   public static FAILURE_STRING =
-    'Calling `store.dispatch` in an Effect is forbidden'
+    'Avoid dispatching many actions in a row to accomplish a larger conceptual "transaction"'
 
-  private static QUERY = `PropertyDeclaration > CallExpression:has(Identifier[name="createEffect"]) CallExpression > PropertyAccessExpression:has(Identifier[name="dispatch"]):has(PropertyAccessExpression > Identifier[name="store"])`
+  public static STORE_DISPATCH_QUERY =
+    'ExpressionStatement:has(CallExpression > PropertyAccessExpression:has(Identifier[name="dispatch"]):has(PropertyAccessExpression > Identifier[name="store"]))'
+  public static QUERY = `${Rule.STORE_DISPATCH_QUERY} ~ ${Rule.STORE_DISPATCH_QUERY}`
 
   public applyWithProgram(
     sourceFile: ts.SourceFile,
