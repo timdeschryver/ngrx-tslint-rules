@@ -53,6 +53,7 @@ To enable all rules, use the `recommended` configuration file.
 | ngrx-no-duplicate-action-types                       | An action type must be unique                                                                                                  | [Example](https://github.com/timdeschryver/ngrx-tslint-rules/tree/master/test/rules/ngrx-no-duplicate-action-types/fixture.ts.lint)    |
 | ngrx-no-typed-store                                  | A store should not be typed                                                                                                    | [Example](https://github.com/timdeschryver/ngrx-tslint-rules/tree/master/test/rules/ngrx-no-typed-store/fixture.ts.lint)               |
 | ngrx-selector-for-select                             | Using string or props drilling is not preferred, use a selector instead                                                        | [Example](https://github.com/timdeschryver/ngrx-tslint-rules/tree/master/test/rules/ngrx-selector-for-select/fixture.ts.lint)          |
+| ngrx-use-create-effect                               | The createEffect creator function is preferred                                                                                 |
 
 ## License
 

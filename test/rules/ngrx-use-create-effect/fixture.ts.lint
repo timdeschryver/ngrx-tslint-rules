@@ -1,0 +1,28 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType, Effect } from '@ngrx/effects'
+
+@Injectable()
+export class FixtureEffects {
+  @Effect()
+  ~~~~~~~~~                                   [error]
+  effectNOK =  this.actions.pipe(
+    ofType('PING'),
+    map(() => ({ type: 'PONG' }))
+  )
+
+  @Effect({ dispatch: false })
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~                [error]
+  effectNOK2 = this.actions.pipe(
+    ofType('PING'),
+    map(() => ({ type: 'PONG' }))
+  )
+
+  effectOK = createEffect(() => this.actions.pipe(
+    ofType('PING'),
+    map(() => ({ type: 'PONG' }))
+  ))
+
+  constructor(private actions: Actions){}
+}
+
+[error]: The createEffect creator function is preferred

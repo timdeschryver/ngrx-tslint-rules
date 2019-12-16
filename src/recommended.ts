@@ -21,6 +21,9 @@ module.exports = {
     'ngrx-selector-for-select': {
       severity: 'error',
     },
+    'ngrx-use-create-effect': {
+      severity: 'warning',
+    },
   },
   rulesDirectory: './rules',
 }
