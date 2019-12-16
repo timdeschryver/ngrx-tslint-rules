@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store'
+import { Actions, createEffect, ofType } from '@ngrx/effects'
+
+@Injectable()
+export class FixtureEffects {
+  effectNOK = createEffect(() => this.actions.pipe(
+    ofType('PING'),
+    map(() => this.store.dispatch({ type: 'PONG' }))
+              ~~~~~~~~~~~~~~~~~~~                           [error]
+  ), { dispatch: false })
+
+  effectOK = createEffect(() => this.actions.pipe(
+    ofType('PING'),
+    map(() => ({ type: 'PONG' }))
+  ))
+
+  constructor(private actions: Actions, private store: Store<{}>){}
+}
+
+[error]: Calling `store.dispatch` in an Effect is forbidden
