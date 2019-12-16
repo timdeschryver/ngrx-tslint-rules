@@ -1,11 +1,12 @@
 module.exports = {
   rules: {
-    'ngrx-action-hygiene': true,
-    'ngrx-effect-creator-and-decorator': true,
-    'ngrx-no-dispatch-in-effects': true,
-    'ngrx-no-duplicate-action-types': true,
-    'ngrx-no-typed-store': true,
-    'ngrx-selector-for-select': true,
+    'ngrx-action-hygiene': 'warning',
+    'ngrx-avoid-dispatching-multiple-actions-sequentially': 'warning',
+    'ngrx-effect-creator-and-decorator': 'error',
+    'ngrx-no-dispatch-in-effects': 'error',
+    'ngrx-no-duplicate-action-types': 'error',
+    'ngrx-no-typed-store': 'error',
+    'ngrx-selector-for-select': 'error',
   },
   rulesDirectory: './rules',
 }

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["es2015"],
+    "noEmit": true,
+    "paths": {
+      "@ngrx/store": ["../../../node_modules/@ngrx/store"]
+    },
+    "skipLibCheck": true,
+    "target": "es5"
+  }
+}
