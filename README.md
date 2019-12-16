@@ -40,6 +40,8 @@ To enable all rules, use the `recommended` configuration file.
 }
 ```
 
+> The recommended rules also export the rules from [rxjs-tslint-rules](https://github.com/cartant/rxjs-tslint-rules) that can be applied to NgRx
+
 ## Rules
 
 > By default all rules are enabled

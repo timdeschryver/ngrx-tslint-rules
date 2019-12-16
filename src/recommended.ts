@@ -1,4 +1,5 @@
 module.exports = {
+  extends: ['rxjs-tslint-rules'],
   rules: {
     'ngrx-action-hygiene': {
       severity: 'warning',
@@ -24,6 +25,10 @@ module.exports = {
     'ngrx-use-create-effect': {
       severity: 'warning',
     },
+    // re-export from rxjs-tslint-rules
+    'rxjs-no-unsafe-catch': { severity: 'error' },
+    'rxjs-no-unsafe-first': { severity: 'error' },
+    'rxjs-no-unsafe-switchmap': { severity: 'error' },
   },
   rulesDirectory: './rules',
 }

@@ -58,6 +58,7 @@
   "dependencies": {
     "@angular-devkit/schematics": "^8.3.2",
     "@phenomnomnominal/tsquery": "^3.0.0",
+    "rxjs-tslint-rules": "^4.27.1",
     "tslib": "^1.8.0",
     "tsutils": "^3.0.0",
     "tsutils-etc": "^1.1.0"
