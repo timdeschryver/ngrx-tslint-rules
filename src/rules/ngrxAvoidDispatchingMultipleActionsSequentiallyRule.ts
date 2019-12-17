@@ -18,8 +18,9 @@ export class Rule extends Lint.Rules.TypedRule {
   public static FAILURE_STRING =
     'Avoid dispatching many actions in a row to accomplish a larger conceptual "transaction"'
 
-  public static STORE_DISPATCH_QUERY =
+  private static STORE_DISPATCH_QUERY =
     'ExpressionStatement:has(CallExpression > PropertyAccessExpression:has(Identifier[name="dispatch"]):has(PropertyAccessExpression > Identifier[name="store"]))'
+  // tslint:disable-next-line: member-ordering
   public static QUERY = `${Rule.STORE_DISPATCH_QUERY} ~ ${Rule.STORE_DISPATCH_QUERY}`
 
   public applyWithProgram(

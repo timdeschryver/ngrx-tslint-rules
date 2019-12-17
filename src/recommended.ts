@@ -16,6 +16,9 @@ module.exports = {
     'ngrx-no-duplicate-action-types': {
       severity: 'error',
     },
+    'ngrx-no-multiple-actions-in-effects': {
+      severity: 'warning',
+    },
     'ngrx-no-typed-store': {
       severity: 'warning',
     },

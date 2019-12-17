@@ -1,0 +1,64 @@
+import { of } from 'rxjs'
+import { switchMap, mergeMap, exhaustMap, concatMap, map, catchError } from 'rxjs/operators'
+import { Action } from '@ngrx/store'
+import { Actions, createEffect } from '@ngrx/effects'
+import { foo, bar } from './actions'
+
+export class FixtureEffects {
+  one$ = createEffect(() =>
+    this.actions$.pipe(switchMap(_ => [foo(), bar()])),
+                                      ~~~~~~~~~~~~~~                      [error]
+  )
+
+  two$ = createEffect(() =>
+    this.actions$.pipe(mergeMap(_ => { return [foo(), bar()] }))
+                                              ~~~~~~~~~~~~~~              [error]
+  )
+
+  three$ = createEffect(() => 
+    this.actions$.pipe(exhaustMap(function() { return [foo(), bar()] }))
+                                                      ~~~~~~~~~~~~~~      [error]
+  )
+
+  // TODO: this should also retult in an error
+  four$ = createEffect(() =>
+    this.actions$.pipe(concatMap(() => { let actions: Action[] = []; return actions; }))
+  )
+
+  five$ = createEffect(() =>
+    this.actions$.pipe(switchMap(() => {
+      return of(foo())
+    }))
+  )
+
+  six$ = createEffect(() => 
+    this.actions$.pipe(
+      exhaustMap(() => {
+        return of({}).pipe(
+          map(response => foo()),
+          catchError(() => of(bar()))
+        );
+      })
+    )
+  )
+
+  seven$ = createEffect(() =>
+    this.actions$.pipe(map(() => foo()))
+  )
+
+  eight$ = createEffect(() => 
+    this.actions$.pipe(
+      exhaustMap(() => {
+        return of({}).pipe(
+          switchMap(() => [foo(), bar()]),
+                          ~~~~~~~~~~~~~~      [error]
+          catchError(() => of(bar()))
+        );
+      })
+    )
+  )
+
+  constructor(private actions$: Actions) {}
+}
+
+[error]: An Effect should not return multiple actions
