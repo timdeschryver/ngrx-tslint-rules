@@ -9,7 +9,7 @@ export class Rule extends Lint.Rules.TypedRule {
     options: null,
     optionsDescription: 'Not configurable',
     requiresTypeInfo: false,
-    ruleName: 'ngrx-use-create-effect',
+    ruleName: 'ngrx-no-effect-decorator',
     type: 'maintainability',
     typescriptOnly: true,
   }
