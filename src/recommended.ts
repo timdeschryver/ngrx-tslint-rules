@@ -16,6 +16,9 @@ module.exports = {
     'ngrx-no-duplicate-action-types': {
       severity: 'error',
     },
+    'ngrx-no-effect-decorator': {
+      severity: 'warning',
+    },
     'ngrx-no-multiple-actions-in-effects': {
       severity: 'warning',
     },
@@ -24,9 +27,6 @@ module.exports = {
     },
     'ngrx-selector-for-select': {
       severity: 'error',
-    },
-    'ngrx-use-create-effect': {
-      severity: 'warning',
     },
     // re-export from rxjs-tslint-rules
     'rxjs-no-unsafe-catch': { severity: 'error' },

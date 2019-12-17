@@ -1,7 +1,7 @@
 {
   "defaultSeverity": "error",
   "rules": {
-    "ngrx-use-create-effect": true
+    "ngrx-no-effect-decorator": true
   },
   "rulesDirectory": ["../../../dist/rules"]
 }
