@@ -1,0 +1,7 @@
+{
+  "defaultSeverity": "error",
+  "rules": {
+    "ngrx-no-multiple-actions-in-effects": true
+  },
+  "rulesDirectory": ["../../../dist/rules"]
+}
