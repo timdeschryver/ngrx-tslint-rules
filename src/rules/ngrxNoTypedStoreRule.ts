@@ -24,7 +24,7 @@ export class Rule extends Lint.Rules.TypedRule {
   ): Lint.RuleFailure[] {
     const parameters = tsquery(
       sourceFile,
-      `ClassDeclaration > Constructor TypeReference > Identifier[name="Store"]`,
+      `ClassDeclaration > Constructor Parameter > TypeReference  > Identifier[name="Store"]`,
     ) as ts.Identifier[]
 
     const hits = parameters

@@ -1,0 +1,23 @@
+import { Store } from '@ngrx/store'
+
+export class NotOk {
+  constructor(store: Store<{}>, store2: Store<{}>){}
+                                ~~~~~~~~~~~~~~~~~           [error]
+}
+
+export class NoCtorOK {
+}
+
+export class EmptyOk {
+  constructor(){}
+}
+
+export class OneOk {
+  constructor(private store: Store<{}>){}
+}
+
+export class OnePlusExtraOk {
+  constructor(private store: Store<{}>, data: object){}
+}
+
+[error]: Store should at most be one time injected
