@@ -22,6 +22,9 @@ module.exports = {
     'ngrx-no-multiple-actions-in-effects': {
       severity: 'warning',
     },
+    'ngrx-no-multiple-stores': {
+      severity: 'warning',
+    },
     'ngrx-no-typed-store': {
       severity: 'warning',
     },
