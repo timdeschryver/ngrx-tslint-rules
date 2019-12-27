@@ -18,17 +18,27 @@ export class Rule extends Lint.Rules.TypedRule {
   public static FAILURE_STRING =
     'Action type does not follow the good action hygiene practice, use "[Source] Event" to define action types'
 
+  private static ACTION_CREATOR_QUERY =
+    'CallExpression > Identifier[name=/createAction.*/]'
+
   public applyWithProgram(
     sourceFile: ts.SourceFile,
     program: ts.Program,
   ): Lint.RuleFailure[] {
-    const creators = tsquery(
-      sourceFile,
-      `CallExpression:has(Identifier[name=/createAction.*/]) > StringLiteral`,
-    )
-    const hits = creators.filter(
-      (node): boolean => !node.getText().match(/[\[].*[\]]\s.*/),
-    )
+    const creators = tsquery(sourceFile, Rule.ACTION_CREATOR_QUERY)
+    const hits = creators
+      .map(({ parent }) => {
+        if (!ts.isCallExpression(parent)) {
+          return undefined
+        }
+
+        return tsquery(parent, 'StringLiteral')[0]
+      })
+      .filter(
+        actionTypeNode =>
+          actionTypeNode && !/[\[].*[\]]\s.*/.test(actionTypeNode.getText()),
+      )
+
     const failures = hits.map(
       (node): Lint.RuleFailure =>
         new Lint.RuleFailure(

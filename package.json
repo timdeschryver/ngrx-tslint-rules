@@ -28,6 +28,7 @@
     "copy:schematics": "cp ./src/schematics/collection.json ./dist/schematics & cp ./src/schematics/ng-add/schema.json ./dist/schematics/ng-add",
     "generate-schema": "ts-node ./src/scripts/generate-schema.ts",
     "lint": "tslint -p .",
+    "build-and-test": "npm run build && npm run test:rules",
     "test": "npm run test:schematics && npm run test:rules",
     "test:schematics": "jest --config ./test/jest.config.json",
     "test:rules": "tslint --test ./test/rules/**/tslint.json",
