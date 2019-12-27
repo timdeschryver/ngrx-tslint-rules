@@ -38,4 +38,18 @@ const action = createAction(
 
 const action = createAction('[Customers] load', ( page: number ) => ({ page }))
 
+
+// https://github.com/timdeschryver/ngrx-tslint-rules/issues/22
+describe("application reducers", () => {
+  describe("appInit reducers", () => {
+    it("should return the initial state", () => {
+      let newState = initializationStateReducer(undefined, createAction("[App Tests] Init"));
+      expect(newState).toEqual(appInitInitialState);
+
+      newState = initializationStateReducer(undefined, initializeApplication);
+      expect(newState).toEqual(appInitInitialState);
+    });
+  });
+});
+
 [action-hygiene]: Action type does not follow the good action hygiene practice, use "[Source] Event" to define action types
