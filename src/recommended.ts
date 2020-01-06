@@ -25,6 +25,9 @@ module.exports = {
     'ngrx-no-multiple-stores': {
       severity: 'warning',
     },
+    'ngrx-no-reducer-in-key-names': {
+      severity: 'warning',
+    },
     'ngrx-no-typed-store': {
       severity: 'warning',
     },

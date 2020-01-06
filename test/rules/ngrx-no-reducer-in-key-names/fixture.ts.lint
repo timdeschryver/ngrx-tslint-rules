@@ -1,0 +1,47 @@
+@NgModule({
+  imports: [
+    StoreModule.forRoot({
+      feeReducer,
+      ~~~~~~~~~~                           [error]
+      fieReducer: fie,
+      ~~~~~~~~~~                           [error]
+      FoeReducer: FoeReducer,
+      ~~~~~~~~~~                           [error]
+      foo,
+      persons: personsReducer,
+    }),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+
+
+@NgModule({
+  imports: [
+    StoreModule.forFeature({
+      feeReducer,
+      ~~~~~~~~~~                           [error]
+      fieReducer: fie,
+      ~~~~~~~~~~                           [error]
+      FoeReducer: FoeReducer,
+      ~~~~~~~~~~                           [error]
+      foo,
+      persons: personsReducer,
+    }),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+
+export const reducers: ActionReducerMap<AppState> = {
+  feeReducer,
+  ~~~~~~~~~~                           [error]
+  fieReducer: fie,
+  ~~~~~~~~~~                           [error]
+  FoeReducer: fromFoe.reducer,
+  ~~~~~~~~~~                           [error]
+  foo,
+  persons: personsReducer,
+};
+
+[error]: Avoid the word "reducer" in the key names to result in better understandable code and state definition
