@@ -19,6 +19,9 @@ module.exports = {
     'ngrx-no-effect-decorator': {
       severity: 'warning',
     },
+    'ngrx-no-effects-in-providers': {
+      severity: 'error',
+    },
     'ngrx-no-multiple-actions-in-effects': {
       severity: 'warning',
     },

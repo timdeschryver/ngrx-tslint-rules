@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core';
+import { StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
+
+@NgModule({
+  imports: [
+    StoreModule.forFeature('persons', {"foo": "bar"}),
+    EffectsModule.forRoot([RootEffectOne, RootEffectTwo]),
+    EffectsModule.forFeature([FeatEffectOne, FeatEffectTwo]),
+    EffectsModule.forFeature([FeatEffectThree]),
+  ],
+  providers: [FeatEffectTwo, UnRegisteredEffect, FeatEffectThree, RootEffectTwo],
+              ~~~~~~~~~~~~~                                                                 [error]
+                                                 ~~~~~~~~~~~~~~~                            [error]
+                                                                  ~~~~~~~~~~~~~             [error]
+
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+
+[error]: The Effect should not be listed as a provider if it is added to the EffectsModule
