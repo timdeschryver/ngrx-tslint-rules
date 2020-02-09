@@ -5,19 +5,25 @@ export class NotOk {
                            ~~~~~~~~~~~~                                           [no-typed-store]
 }
 
-
 export class NotOk2 {
   constructor(cdr: ChangeDetectionRef, private store: Store<CustomersState>){}
                                                             ~~~~~~~~~~~~~~        [no-typed-store]
+}
+
+export class NotOk3 {
+  constructor(private store: Store<any>, private personsService: PersonsService){}
 }
 
 export class Ok {
   constructor(store: Store<{}>)
 }
 
-
-export class NotOk2 {
-  constructor(private store: Store<any>, private personsService: PersonsService){}
+export class Ok2 {
+  constructor(store: Store<object>)
 }
 
-[no-typed-store]: Store should not be typed, use `Store<{}>` instead
+export class Ok3 {
+  constructor(store: Store<object>)
+}
+
+[no-typed-store]: Store should not be typed, for v8 use `Store<object>` instead, for v9 use `Store`
