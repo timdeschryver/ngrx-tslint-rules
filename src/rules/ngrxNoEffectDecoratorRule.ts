@@ -17,7 +17,7 @@ export class Rule extends Lint.Rules.TypedRule {
   public static FAILURE_STRING =
     'The createEffect creator function is preferred'
 
-  private static QUERY = `ClassDeclaration Decorator > CallExpression:has(Identifier[name="Effect"])`
+  private static QUERY = `ClassDeclaration Decorator > CallExpression[expression.text="Effect"]`
 
   public applyWithProgram(sourceFile: ts.SourceFile): Lint.RuleFailure[] {
     const hits = tsquery(sourceFile, Rule.QUERY)
