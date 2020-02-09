@@ -16,7 +16,7 @@ export class Rule extends Lint.Rules.TypedRule {
   }
 
   public static FAILURE_STRING =
-    'Store should not be typed, use `Store<{}>` instead'
+    'Store should not be typed, for v8 use `Store<object>` instead, for v9 use `Store`'
 
   public applyWithProgram(
     sourceFile: ts.SourceFile,
@@ -24,21 +24,16 @@ export class Rule extends Lint.Rules.TypedRule {
   ): Lint.RuleFailure[] {
     const parameters = tsquery(
       sourceFile,
-      `ClassDeclaration > Constructor Parameter > TypeReference  > Identifier[name="Store"]`,
-    ) as ts.Identifier[]
+      `ClassDeclaration > Constructor Parameter > TypeReference[typeName.text="Store"] TypeReference`,
+    ) as ts.TypeReferenceNode[]
 
-    const hits = parameters
-      .map(node => {
-        const parent = (node.parent as unknown) as ts.TypeReference
-        const [type] = (parent.typeArguments as unknown) as ts.Node[]
-        return type
-      })
-      .filter(
-        type =>
-          type &&
-          ts.isTypeReferenceNode(type) &&
-          type.typeName.getText() !== '{}',
-      )
+    const hits = parameters.filter(
+      type =>
+        type.typeName &&
+        ts.isIdentifier(type.typeName) &&
+        type.typeName.text !== '{}' &&
+        type.typeName.text !== 'object',
+    )
 
     const failures = hits.map(
       (node): Lint.RuleFailure =>
