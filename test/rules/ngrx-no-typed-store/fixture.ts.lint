@@ -12,18 +12,23 @@ export class NotOk2 {
 
 export class NotOk3 {
   constructor(private store: Store<any>, private personsService: PersonsService){}
+                                   ~~~                                             [no-typed-store]
+}
+
+export class NotOk4 {
+  constructor(store: Store<{}>)
+                           ~~                                                     [no-typed-store]
+
+}
+
+export class NotOk5 {
+  constructor(store: Store<object>)
+                           ~~~~~~                                           [no-typed-store]
+
 }
 
 export class Ok {
-  constructor(store: Store<{}>)
+  constructor(store: Store)
 }
 
-export class Ok2 {
-  constructor(store: Store<object>)
-}
-
-export class Ok3 {
-  constructor(store: Store<object>)
-}
-
-[no-typed-store]: Store should not be typed, for v8 use `Store<object>` instead, for v9 use `Store`
+[no-typed-store]: Store should not be typed, use `Store` (without generic) instead
