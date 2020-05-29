@@ -18,7 +18,7 @@ function increaseFunc(state: State, value: number): State {
 const reducer = createReducer(
   initialState,
 
-  // No explicit return type when no action props
+  // No explicit return type defined means values can be assigned to non-existent properties.
   on(increment, s => ({
                 ~~~~~~~
     ...s,
@@ -34,12 +34,12 @@ const reducer = createReducer(
       counter: s.counter + 1,
     }),
   ),
-  // Do not require functions to have an explicit return type defined in on method
+  // Do not require functions to have an explicit return type as likely that the function is typed
   on(increment, incrementFunc),
   on(increment, s => incrementFunc(s)),
   on(increment, (s): State => incrementFunc(s)),
 
-  // No explicit return type when action has props
+  // No explicit return type
   on(increase, (s, action) => ({
                ~~~~~~~~~~~~~~~~~
     ...s,
@@ -55,7 +55,7 @@ on(
     counter: s.counter + action.value,
   }),
 ),
-// No explicit return type when action has props and deconstructed
+// No explicit return type
 on(increase, (s, { value }) => ({
              ~~~~~~~~~~~~~~~~~~~~
   ...s,
