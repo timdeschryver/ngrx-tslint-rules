@@ -32,7 +32,7 @@ Next, add `ngrx-tslint-rules` to your `tslint.json` file, and the rules to the `
 }
 ```
 
-To enable all rules, use the `recommended` configuration file.
+To enable all recommended rules, use the `recommended` configuration file.
 
 ```json
 {
@@ -42,7 +42,7 @@ To enable all rules, use the `recommended` configuration file.
 
 > The recommended rules also export the rules from [rxjs-tslint-rules](https://github.com/cartant/rxjs-tslint-rules) that can be applied to NgRx
 
-## Rules
+## Recommend Rules
 
 > By default all rules are enabled
 
@@ -60,6 +60,23 @@ To enable all rules, use the `recommended` configuration file.
 | ngrx-no-reducer-in-key-names                         | Avoid the word "reducer" in the key names                                                                                      | [Example](https://github.com/timdeschryver/ngrx-tslint-rules/tree/master/test/rules/ngrx-no-reducer-in-key-names/fixture.ts.lint)                         |
 | ngrx-no-typed-store                                  | A store should not be typed                                                                                                    | [Example](https://github.com/timdeschryver/ngrx-tslint-rules/tree/master/test/rules/ngrx-no-typed-store/fixture.ts.lint)                                  |
 | ngrx-selector-for-select                             | Using string or props drilling is not preferred, use a selector instead                                                        | [Example](https://github.com/timdeschryver/ngrx-tslint-rules/tree/master/test/rules/ngrx-selector-for-select/fixture.ts.lint)                             |
+
+## Optional Rules
+
+To enable optional rules add them to the `rules` section in your `tslint.json` file.
+
+```json
+{
+  "extends": ["ngrx-tslint-rules"],
+  "rules": {
+    "ngrx-on-reducer-explicit-return-type": true
+  }
+}
+```
+
+| Rule                                 | Description                                     | Examples                                                                                                                                  |
+| ------------------------------------ | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| ngrx-on-reducer-explicit-return-type | Enforces type safety for `on` reducer callbacks | [Example](https://github.com/timdeschryver/ngrx-tslint-rules/tree/master/test/rules/ngrx-on-reducer-explicit-return-type/fixture.ts.lint) |
 
 ## License
 
