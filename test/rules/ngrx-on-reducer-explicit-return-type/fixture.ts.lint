@@ -1,0 +1,81 @@
+import { createReducer, on, select, createAction } from '@ngrx/store'
+import { increase, increment } from './actions'
+
+interface State {
+  counter: number
+}
+const initialState: State = {
+  counter: 0,
+}
+
+function incrementFunc(state: State): State {
+  return { ...state, counter: state.counter + 1 }
+}
+function increaseFunc(state: State, value: number): State {
+  return { ...state, counter: state.counter + value }
+}
+
+const reducer = createReducer(
+  initialState,
+
+  // No explicit return type when no action props
+  on(increment, s => ({
+                ~~~~~~~
+    ...s,
+~~~~~~~~~
+    counter: s.counter + 1,
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  })),
+~~~~                                              [on-reducer-explicit-return-type]
+  on(
+    increment,
+    (s): State => ({
+      ...s,
+      counter: s.counter + 1,
+    }),
+  ),
+  // Do not require functions to have an explicit return type defined in on method
+  on(increment, incrementFunc),
+  on(increment, s => incrementFunc(s)),
+  on(increment, (s): State => incrementFunc(s)),
+
+  // No explicit return type when action has props
+  on(increase, (s, action) => ({
+               ~~~~~~~~~~~~~~~~~
+    ...s,
+~~~~~~~~~
+    counter: s.counter + action.value,
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  })),
+~~~~                                              [on-reducer-explicit-return-type]
+on(
+  increase,
+  (s, action): State => ({
+    ...s,
+    counter: s.counter + action.value,
+  }),
+),
+// No explicit return type when action has props and deconstructed
+on(increase, (s, { value }) => ({
+             ~~~~~~~~~~~~~~~~~~~~
+  ...s,
+~~~~~~~
+  counter: s.counter + value,
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+})),
+~~                                              [on-reducer-explicit-return-type]
+on(
+  increase,
+  (s, { value }): State => ({
+    ...s,
+    counter: s.counter + value,
+  }),
+),
+on(increase, (s, { value }) => increaseFunc(s, value)),
+on(increase, (s, { value }): State => increaseFunc(s, value))
+
+)
+
+
+[on-reducer-explicit-return-type]: On reducers should have an explicit return type when using arrow functions, on(action, (state):State => {}
+
