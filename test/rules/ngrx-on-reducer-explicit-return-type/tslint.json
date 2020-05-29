@@ -1,0 +1,7 @@
+{
+  "defaultSeverity": "error",
+  "rules": {
+    "ngrx-on-reducer-explicit-return-type": true
+  },
+  "rulesDirectory": ["../../../dist/rules"]
+}
