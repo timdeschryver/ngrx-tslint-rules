@@ -24,7 +24,7 @@ export class Rule extends Lint.Rules.TypedRule {
   ): Lint.RuleFailure[] {
     const creators = tsquery(
       sourceFile,
-      'CallExpression:has(Identifier[name=createReducer])  CallExpression:has(Identifier[name=on]) ArrowFunction:not(:has(TypeReference),:has(CallExpression))',
+      'CallExpression:has(Identifier[name=createReducer])  CallExpression:has(Identifier[name=on]) > ArrowFunction:not(:has(TypeReference),:has(CallExpression))',
     ) as ts.CallExpression[]
 
     const failures = creators.map(
