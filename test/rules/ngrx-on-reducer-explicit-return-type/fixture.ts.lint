@@ -84,6 +84,16 @@ on(
 
 )
 
+// https://github.com/timdeschryver/ngrx-tslint-rules/issues/38
+export const onlineStateReducer = createReducer<boolean>(
+  onlineInitialState,
+  on(appIsOnline, (_currentState, _action): boolean => {
+    return true;
+  }),
+  on(appIsOffline, (_currentState, _action): boolean => {
+    return false;
+  }),
+);
 
 [on-reducer-explicit-return-type]: On reducers should have an explicit return type when using arrow functions, on(action, (state):State => {}
 

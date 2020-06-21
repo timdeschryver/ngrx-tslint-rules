@@ -24,19 +24,21 @@ export class Rule extends Lint.Rules.TypedRule {
   ): Lint.RuleFailure[] {
     const creators = tsquery(
       sourceFile,
-      'CallExpression:has(Identifier[name=createReducer])  CallExpression:has(Identifier[name=on]) > ArrowFunction:not(:has(TypeReference),:has(CallExpression))',
-    ) as ts.CallExpression[]
+      'CallExpression[expression.name="createReducer"] > CallExpression[expression.name="on"] > ArrowFunction:not(:has(CallExpression))',
+    ) as ts.ArrowFunction[]
 
-    const failures = creators.map(
-      (node): Lint.RuleFailure =>
-        new Lint.RuleFailure(
-          sourceFile,
-          node.getStart(),
-          node.getStart() + node.getWidth(),
-          Rule.FAILURE_STRING,
-          this.ruleName,
-        ),
-    )
+    const failures = creators
+      .filter(node => !node.type)
+      .map(
+        (node): Lint.RuleFailure =>
+          new Lint.RuleFailure(
+            sourceFile,
+            node.getStart(),
+            node.getStart() + node.getWidth(),
+            Rule.FAILURE_STRING,
+            this.ruleName,
+          ),
+      )
     return failures
   }
 }
