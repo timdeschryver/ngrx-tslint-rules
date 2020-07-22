@@ -32,6 +32,20 @@ export class FixtureComponent {
     this.store.dispatch({ type: 'PONG' })
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         [error]
   }
+
+  pingPong$() {
+    this.store$.dispatch({ type: 'PING' })
+    this.store$.dispatch({ type: 'PONG' })
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         [error]
+  }
+
+  pong$() {
+    this.store$.dispatch({ type: 'PING' })
+    this.ping();
+    this.name = 'Bob'
+    this.store$.dispatch({ type: 'PONG' })
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         [error]
+  }
 }
 
 [error]: Avoid dispatching many actions in a row to accomplish a larger conceptual "transaction"

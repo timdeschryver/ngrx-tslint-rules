@@ -20,25 +20,32 @@ export class Rule extends Lint.Rules.TypedRule {
 
   private static STORE_DISPATCH_QUERY =
     'ExpressionStatement:has(CallExpression > PropertyAccessExpression:has(Identifier[name="dispatch"]):has(PropertyAccessExpression > Identifier[name="store"]))'
+  private static STORE_DISPATCH_QUERY$ =
+    'ExpressionStatement:has(CallExpression > PropertyAccessExpression:has(Identifier[name="dispatch"]):has(PropertyAccessExpression > Identifier[name="store$"]))'
   // tslint:disable-next-line: member-ordering
   public static QUERY = `${Rule.STORE_DISPATCH_QUERY} ~ ${Rule.STORE_DISPATCH_QUERY}`
+  // tslint:disable-next-line: member-ordering
+  public static QUERY$ = `${Rule.STORE_DISPATCH_QUERY$} ~ ${Rule.STORE_DISPATCH_QUERY$}`
 
   public applyWithProgram(
     sourceFile: ts.SourceFile,
     program: ts.Program,
   ): Lint.RuleFailure[] {
     const hits = tsquery(sourceFile, Rule.QUERY)
+    const hits$ = tsquery(sourceFile, Rule.QUERY$)
 
-    const failures = hits.map(
-      (node): Lint.RuleFailure =>
-        new Lint.RuleFailure(
-          sourceFile,
-          node.getStart(),
-          node.getStart() + node.getWidth(),
-          Rule.FAILURE_STRING,
-          this.ruleName,
-        ),
-    )
+    const failures = hits
+      .concat(hits$)
+      .map(
+        (node): Lint.RuleFailure =>
+          new Lint.RuleFailure(
+            sourceFile,
+            node.getStart(),
+            node.getStart() + node.getWidth(),
+            Rule.FAILURE_STRING,
+            this.ruleName,
+          ),
+      )
 
     return failures
   }
