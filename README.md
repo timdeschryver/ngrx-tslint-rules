@@ -1,6 +1,6 @@
-# ngrx-tslint-rules
+# The NgRx TSLint Plugin has been deprecated in favor of the ESLint version. See, [eslint-plugin-ngrx](https://github.com/timdeschryver/eslint-plugin-ngrx) for more info and a migrate guideline.
 
-> For the ESLint version of this library see, [eslint-plugin-ngrx](https://github.com/timdeschryver/eslint-plugin-ngrx)
+# ngrx-tslint-rules
 
 ## Installation
 
